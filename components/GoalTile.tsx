@@ -13,11 +13,16 @@ export default function GoalTile(props: GoalTileProps) {
   );
 }
 
+import { Spacing, Colours } from "../theme";
+
 const styles = StyleSheet.create({
   tile: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
+    display: "flex",
     justifyContent: "center",
+    alignItems: "center",
+    padding: Spacing.small,
+    marginBottom: Spacing.medium,
+    borderWidth: 1,
+    borderColor: Colours.dark,
   },
 });

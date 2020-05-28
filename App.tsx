@@ -1,40 +1,36 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { StyleSheet, View, Button, TextInput, ScrollView } from "react-native";
 
+import GoalInput from "./components/GoalInput";
 import GoalTile from "./components/GoalTile";
 
 export default function App() {
   const [goals, setGoals] = useState<string[]>([]);
-  let newGoalText = "DERP";
+
+  function addCourseGoal(newGoalText: string) {
+    if (goals.indexOf(newGoalText) > -1) {
+      return;
+    }
+    setGoals([...goals, newGoalText]);
+  }
 
   return (
-    <View style={{ padding: "30" }}>
-      <View>
-        <TextInput value={newGoalText} />
-        <Button
-          title="+"
-          onPress={() => {
-            if (goals.indexOf(newGoalText) > -1) {
-              return;
-            }
+    <View style={styles.appContainer}>
+      <GoalInput onGoalAdd={addCourseGoal} />
 
-            setGoals([...goals, newGoalText]);
-          }}
-        />
-      </View>
-      <View>
+      <ScrollView>
         {goals.map((goalTitle) => (
           <GoalTile key={goalTitle} title={goalTitle} />
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }
 
+import { Spacing } from "./theme";
+
 const styles = StyleSheet.create({
-  inputArea: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+  appContainer: {
+    padding: Spacing.large,
   },
 });
