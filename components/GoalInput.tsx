@@ -30,11 +30,15 @@ export default function GoalInput(props: GoalInputProps) {
 import { Spacing, Colours } from "../theme";
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: Spacing.small,
   },
 
   goalInput: {
     borderBottomColor: Colours.dark,
+    width: "80%",
     borderBottomWidth: 1,
     marginBottom: Spacing.extrasmall,
   },
