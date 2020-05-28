@@ -1,19 +1,40 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+
+import GoalTile from "./components/GoalTile";
 
 export default function App() {
+  const [goals, setGoals] = useState<string[]>([]);
+  let newGoalText = "DERP";
+
   return (
-    <View style={styles.container}>
-      <Text>Pew pew pew!</Text>
+    <View style={{ padding: "30" }}>
+      <View>
+        <TextInput value={newGoalText} />
+        <Button
+          title="+"
+          onPress={() => {
+            if (goals.indexOf(newGoalText) > -1) {
+              return;
+            }
+
+            setGoals([...goals, newGoalText]);
+          }}
+        />
+      </View>
+      <View>
+        {goals.map((goalTitle) => (
+          <GoalTile key={goalTitle} title={goalTitle} />
+        ))}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  inputArea: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
